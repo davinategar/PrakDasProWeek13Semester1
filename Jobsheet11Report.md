@@ -222,3 +222,294 @@ public class CinemaWithScanner07 {
 **The Result:**
 
 ![result-experiment2-1-jobsheet11](result-experiment2-1-jobsheet11.png)
+
+**Question Experiment 2:**
+
+1. Must the elements of an array be filled from Scanner in order, starting from index 0? Explain!
+
+   **Answer:**
+   No, the elements of an array do not have to be filled from Scanner in order, starting from index 0. In Java, we can fill     array elements in any order by accessing the desired index. In this program, the audience member's name is stored based      on the row and column entered by the user. Therefore, the array can be filled randomly, and the other elements can remain    empty until they are filled.
+
+2. Modify the program so that it shows the following menu:
+
+   | Menu | Function |
+    |---|---|
+    | 1 | Enter audience data |
+    | 2 | Show the audience list |
+    | 3 | Exit |
+
+  **Answer:**
+
+  The code:
+
+  ```
+  import java.util.Scanner;
+
+public class CinemaWithScanner07 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int row, col, menu;
+        String name;
+        String[][] audience = new String[4][2];
+
+        while (true) {
+            System.out.println("\n| Menu | Function |");
+            System.out.println("|---|---|");
+            System.out.println("| 1 | Enter audience data |");
+            System.out.println("| 2 | Show the audience list |");
+            System.out.println("| 3 | Exit |");
+
+            System.out.print("Choose menu: ");
+            menu = sc.nextInt();
+            sc.nextLine();
+
+            switch (menu) {
+                case 1:
+                    System.out.print("Enter name: ");
+                    name = sc.nextLine();
+
+                    System.out.print("Enter row: ");
+                    row = sc.nextInt();
+
+                    System.out.print("Enter column: ");
+                    col = sc.nextInt();
+                    sc.nextLine();
+
+                    audience[row - 1][col - 1] = name;
+                    break;
+
+                case 2:
+                    System.out.println("\nAudience list:");
+                    for (int i = 0; i < audience.length; i++) {
+                        for (int j = 0; j < audience[i].length; j++) {
+                            if (audience[i][j] == null) {
+                                System.out.print("[Empty]");
+                            } else {
+                                System.out.print("[" + audience[i][j] + "]\t");
+                            }
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Program exited.");
+                    return;
+
+                default:
+                    System.out.println("Invalid menu choice!");
+            }
+        }
+    }
+}
+  ```
+
+  Result: 
+
+  ![result-experiment2-2-jobsheet11](result-experiment2-2-jobsheet11.png)
+
+3. Modify the program to handle a row or column number that does not exist (for examplerow 7 or column 0).
+
+   **Answer:**
+   I change the ```case 1``` code to be like this:
+
+   ```
+   System.out.print("Enter name: ");
+   name = sc.nextLine();
+
+   System.out.print("Enter row: ");
+   row = sc.nextInt();
+
+   System.out.print("Enter column: ");
+   col = sc.nextInt();
+   sc.nextLine();
+
+   if (row < 1 || row > 4 || col < 1 || col > 2) {
+       System.out.println("Invalid row or column number!");
+   } else {
+       audience[row - 1][col - 1] = name;
+       System.out.println("Audience data successfully added!");
+   }
+   break;
+   ```
+
+   The result:
+
+   ![result-experiment2-3-jobsheet11](result-experiment2-3-jobsheet11.png)
+
+4. In menu 1, display a warning if the chosen seat is already taken by another audiencemember, then ask for the row and column again.
+
+   **Answer:**
+
+   The code:
+
+   ```
+   case 1:
+       System.out.print("Enter name: ");
+       name = sc.nextLine();
+
+       while (true) {
+           System.out.print("Enter row: ");
+
+           if (!sc.hasNextInt()) {
+               System.out.println("Please enter a number!");
+               sc.nextLine();
+               continue;
+           }
+           row = sc.nextInt();
+
+           System.out.print("Enter column: ");
+
+           if (!sc.hasNextInt()) {
+               System.out.println("Please enter a number!");
+               sc.nextLine();
+               continue;
+           }
+
+           col = sc.nextInt();
+           sc.nextLine();
+
+           if (row < 1 || row > audience.length) {
+               System.out.println("Invalid row number! Please try again.");
+           } else if (col < 1 || col > audience[row - 1].length) {
+                   System.out.println("Invalid column number! Please try again.");
+           } else if (audience[row - 1][col - 1] != null) {
+                   System.out.println("Seat is already occupied! Please choose another seat.");
+           } else {
+               audience[row - 1][col - 1] = name;
+               System.out.println("Audience data successfully added!");
+               break;
+           }
+       }
+       break;
+    ```
+
+    The Result:
+
+   ![result-experiment2-4-jobsheet11](result-experiment2-4-jobsheet11.png)
+
+   Explanation:
+   The program was modified to prevent errors when the user enters invalid input. The hasNextInt() method checks whether the input is a number before using nextInt(), so       the program does not crash when the user enters text instead of a number.
+
+   The row and column validation ensures that the selected seat is within the array range. The program also checks whether the seat is already occupied using != null. If       the input is invalid or the seat is taken, the program asks the user to enter another seat. This makes the program safer and easier to use.
+
+5. In menu 2, if a seat is empty (```null```), display ```***``` instead of ```null```.
+
+   **Answer:**
+
+   The code:
+
+   ```
+   import java.util.Scanner;
+
+    public class CinemaWithScannerQuesNo5 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int row, col, menu;
+        String name;
+        String[][] audience = new String[4][2];
+
+        while (true) {
+            System.out.println("\nMenu");
+            System.out.println("1. Enter audience data");
+            System.out.println("2. Show the audience list");
+            System.out.println("3. Exit");
+
+            System.out.print("Choose menu: ");
+
+            if (!sc.hasNextInt()) {
+                System.out.println("Please enter a number!");
+                sc.nextLine();
+                continue;
+            }
+
+            menu = sc.nextInt();
+            sc.nextLine();
+
+            switch (menu) {
+                case 1:
+                    System.out.print("Enter name: ");
+                    name = sc.nextLine();
+
+                    while (true) {
+                        System.out.print("Enter row: ");
+
+                        if (!sc.hasNextInt()) {
+                            System.out.println("Please enter a number!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        row = sc.nextInt();
+
+                        System.out.print("Enter column: ");
+
+                        if (!sc.hasNextInt()) {
+                            System.out.println("Please enter a number!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        col = sc.nextInt();
+                        sc.nextLine();
+
+                        if (row < 1 || row > audience.length) {
+                            System.out.println("Invalid row number!");
+                        } else if (col < 1 || col > audience[row - 1].length) {
+                            System.out.println("Invalid column number!");
+                        } else if (audience[row - 1][col - 1] != null) {
+                            System.out.println("Seat is already occupied! Please choose another seat.");
+                        } else {
+                            audience[row - 1][col - 1] = name;
+                            System.out.println("Audience data successfully added!");
+                            break;
+                        }
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\nAudience list:");
+                    for (int i = 0; i < audience.length; i++) {
+                        for (int j = 0; j < audience[i].length; j++) {
+                            if (audience[i][j] == null) {
+                                System.out.print("*** ");
+                            } else {
+                                System.out.print(audience[i][j] + " ");
+                            }
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Program exited.");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid menu choice!");
+            }
+        }
+    }
+    }
+   ```
+
+   The Result:
+
+   ![result-experiment2-5-jobsheet11](result-experiment2-5-jobsheet11.png)
+   
+**Discussion Question:**
+
+If the user types letters at the row prompt, ```nextInt()``` throws an ```InputMismatchException```. Try it, then discuss how the program should handle this input error.If the user decides the number of rows and columns at run time, which part of the code must change? Why can a 2-dimensional array not change its size after it is created?
+
+**Answer:**   
+
+1. If Input error when typing letters at the row prompt:
+
+   If the user types letters instead of a number, ```nextInt()``` will throw an ```InputMismatchException``` and the program may stop. To handle this error, the program        should check the input using ```hasNextInt()``` before reading it. If the input is not a number, the program should display a warning, clear the invalid input, and ask      the user to try again. This prevents the program from crashing.
+
+2. When Changing the number of rows and columns at run time:
+
+   The array declaration must be changed from a fixed size to a size based on the user's input. The program must ask for the number of rows and columns before creating the     array. A 2-dimensional array in Java has a fixed size once it is created, so its size cannot be changed afterward. If a different size is needed, a new array must be        created.
+
+## Experiment 3: 2-Dimensional Array with Rows of Different Lengths   
