@@ -513,3 +513,6 @@ If the user types letters at the row prompt, ```nextInt()``` throws an ```InputM
    The array declaration must be changed from a fixed size to a size based on the user's input. The program must ask for the number of rows and columns before creating the     array. A 2-dimensional array in Java has a fixed size once it is created, so its size cannot be changed afterward. If a different size is needed, a new array must be        created.
 
 ## Experiment 3: 2-Dimensional Array with Rows of Different Lengths   
+
+**The code**
+
