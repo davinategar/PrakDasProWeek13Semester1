@@ -183,3 +183,42 @@ public class cinema07 {
 
 ## Experiment 2: Scanner and Loops for Input and Output of a 2-DimensionalArray
 
+**The Code:**
+```
+import java.util.Scanner;
+
+public class CinemaWithScanner07 { 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int row, col;
+        String name, choice;
+        String[][] audience = new String[4][2];
+
+        while (true) {
+            System.out.print("Enter name: ");
+            name = sc.nextLine();
+
+            System.out.print("Enter row: ");
+            row = sc.nextInt();
+
+            System.out.print("Enter column: ");
+            col = sc.nextInt();
+            sc.nextLine();
+
+            audience[row - 1][col - 1] = name;
+
+            System.out.print("Add another audience member? (y/n): ");
+            choice = sc.nextLine();
+
+            if (choice.equalsIgnoreCase("n")) {
+                break;
+            }
+        }
+    }
+}
+```
+
+**The Result:**
+
+![result-experiment2-1-jobsheet11](result-experiment2-1-jobsheet11.png)
