@@ -513,3 +513,100 @@ If the user types letters at the row prompt, ```nextInt()``` throws an ```InputM
    The array declaration must be changed from a fixed size to a size based on the user's input. The program must ask for the number of rows and columns before creating the     array. A 2-dimensional array in Java has a fixed size once it is created, so its size cannot be changed afterward. If a different size is needed, a new array must be        created.
 
 ## Experiment 3: 2-Dimensional Array with Rows of Different Lengths   
+
+**The code**
+
+```
+import java.util.Arrays;
+
+public class Numbers07 {
+    public static void main(String[] args) {
+        int[][] myNumbers = new int[3][];
+        myNumbers[0] = new int[5];
+        myNumbers[1] = new int[3];
+        myNumbers[2] = new int[1];
+
+        for (int i = 0; i < myNumbers.length; i++) {
+            System.out.println(Arrays.toString(myNumbers[i]));
+        }
+    }
+}
+```
+
+**The Result**
+
+![result-experiment3-1-jobsheet11](result-experiment3-1-jobsheet11.png)
+
+**Question Experiment 3:**
+
+1. What does ```Arrays.toString()``` do?
+
+   **Answer:**
+   ```Arrays.toString(numbers)``` takes the array's elements and presents them inside square brackets, separated by commas.
+
+2. In Code 16, ```Arrays.toString()``` is called on ```myNumbers[i]```. Change the call ```toArrays.toString(myNumbers)```, then compile and run the program. What is displayed?Explain. 
+
+   **Answer:**
+
+   ![result-experiment3-2-jobsheet11](result-experiment3-2-jobsheet11.png)
+
+   Explanation:
+   The exact numbers and characters after @ may be different each time. Because, ```myNumbers``` is a 2D array, which means it contains other arrays (rows). Therefore,         Arrays.toString(myNumbers) treats the 2D array as an array of objects, so it displays the references of the inner arrays instead of their actual contents.
+
+4. Also run ```System.out.println(Arrays.deepToString(myNumbers));```. Compare the result withCode 16. Why is ```deepToString()``` needed for a 2-dimensional array?
+
+   **Answer:**
+
+   ![result-experiment3-3-jobsheet11](result-experiment3-3-jobsheet11.png)
+
+   Explanation:
+   ```Arrays.toString()``` only processes the first level of the array, so it displays the references of the inner arrays instead of their actual elements. Meanwhile,          ```Arrays.deepToString()``` goes deeper into the nested arrays and displays their actual contents. Therefore, it is needed to easily display the contents of a 2-            dimensional array in a readable format.
+
+5. What is the default value of an array element of type int?
+
+   **Answer:**
+   The default value of an array element of type `int` is `0`. Java automatically initializes all `int` array elements to zero when the array is created.
+
+6. Add the following code to display the length of each row. Compile and run it, then observethe result.
+
+    ```
+    for (int i = 0; i < myNumbers.length; i++) {
+            System.out.println("Lenght of row " + (i + 1) + ": " +
+        myNumbers[i].length);
+        }
+    ```
+    
+   **Answer:**
+
+   ![result-experiment3-3-jobsheet11](result-experiment3-3-jobsheet11.png)
+
+   Explanation:
+   The program displays the length of each row in the 2D array. Row 1 has 5 elements, row 2 has 3 elements, and row 3 has 1 element. The ```myNumbers[i].length``` is used      to get the number of elements in each row. Since each row has a different size, the array is called a ragged array.
+
+7. After instantiation, run ```myNumbers[0] = new int[7];```, then print ```myNumbers.length``` and ```myNumbers[0].length``` . Which value changes? Why?
+
+   **Answer:**
+   ![result-experiment3-5-jobsheet11](result-experiment3-5-jobsheet11.png)
+
+   Explanation:
+   Only `myNumbers[0].length` changes from 5 to 7, while `myNumbers.length` remains 3. This happens because assigning `new int[7]` replaces the first row with a new array      of 7 elements, but it does not change the number of rows in the outer array.
+
+**Discussion Questions:**
+
+1. `int[][] copy = myNumbers;` `copy[0][0] = 99;` `System.out.println(myNumbers[0][0]);`. Why does the value in myNumbers change too? What isthe difference from copying the values one by one with a loop?
+
+   **Answer:**
+
+   ![result-experiment3-6-jobsheet11](result-experiment3-6-jobsheet11.png)
+
+   Explanation:
+   When copy = myNumbers is used, both variables refer to the same array, so changing a value through copy also changes myNumbers. Copying values one by one using nested       loops creates new outer and inner arrays, so the two arrays are independent.
+
+2. If you want to copy a 2-dimensional array correctly, what would the copying code look like? Isclone() enough? Test it with an array that contains arrays.
+
+   **Answer:**
+   Using clone() is not enough for a 2D array because it only creates a shallow copy of the outer array. The inner arrays are still shared. To make a proper copy, new inner    arrays must be created and their elements copied individually using nested loops. This is called a deep copy.
+
+## Experiment 4: SIAKAD Case Study
+
+**The Code:**
