@@ -516,3 +516,38 @@ If the user types letters at the row prompt, ```nextInt()``` throws an ```InputM
 
 **The code**
 
+```
+import java.util.Arrays;
+
+public class Numbers07 {
+    public static void main(String[] args) {
+        int[][] myNumbers = new int[3][];
+        myNumbers[0] = new int[5];
+        myNumbers[1] = new int[3];
+        myNumbers[2] = new int[1];
+
+        for (int i = 0; i < myNumbers.length; i++) {
+            System.out.println(Arrays.toString(myNumbers[i]));
+        }
+    }
+}
+```
+
+**The Result**
+
+![result-experiment3-1-jobsheet11](result-experiment3-1-jobsheet11.png)
+
+**Question Experiment 3:**
+
+1. What does ```Arrays.toString()``` do?
+
+   **Answer:**
+   ```Arrays.toString(numbers)``` takes the array's elements and presents them inside square brackets, separated by commas.
+
+2. In Code 16, ```Arrays.toString()``` is called on ```myNumbers[i]```. Change the call ```toArrays.toString(myNumbers)```, then compile and run the program. What is displayed?Explain.
+
+   **Answer:**
+   ![result-experiment3-2-jobsheet11](result-experiment3-2-jobsheet11.png)
+
+   Explanation:
+   The exact numbers and characters after @ may be different each time. Because, ```myNumbers``` is a 2D array, which means it contains other arrays (rows). Therefore,         Arrays.toString(myNumbers) treats the 2D array as an array of objects, so it displays the references of the inner arrays instead of their actual contents.
