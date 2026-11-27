@@ -610,3 +610,79 @@ public class Numbers07 {
 ## Experiment 4: SIAKAD Case Study
 
 **The Code:**
+
+```
+import java.util.Scanner;
+
+public class SIAKAD07 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int[][] scores = new int[4][3];
+
+        for (int i = 0; i < scores.length; i++) {
+            System.out.println("Enter scores student no. " + (i + 1));
+            double totalPerStudent = 0;
+
+            for (int j = 0; j < scores[i].length; j++) {
+                System.out.print("Score for course " + (j + 1) + ": ");
+                scores[i][j] = sc.nextInt();
+                totalPerStudent += scores[i][j];
+            }
+
+            System.out.println("Average score: " + totalPerStudent / scores[i].length);
+        }
+
+        System.out.println("\n====================================");
+        System.out.println("Average score of each course:");
+
+        for (int j = 0; j < scores[0].length; j++) {
+            double totalPerCourse = 0;
+
+            for (int i = 0; i < scores.length; i++) {
+                totalPerCourse += scores[i][j];
+            }
+
+            System.out.println("Course " + (j + 1) + ": " + totalPerCourse / scores.length);
+        }
+
+        sc.close();
+    }
+}
+```
+
+**The Result:**
+
+![result-experiment4-1-jobsheet11](result-experiment4-1-jobsheet11.png)
+
+**Question:**
+
+1. What if the number of students and the number of courses change? Modify the SIAKADprogram so that both numbers can be decided while the program runs.
+
+   **Answer:**
+
+   The result:
+
+   !result-experiment4-2-jobsheet11](result-experiment4-2-jobsheet11)
+
+**Discussion Question:**
+
+1. In Code 20, the variable totalPerStudent is declared inside the outer loop.What happens if you move the declaration outside the loop? Explain with an example of scores.If some scores have not been entered yet (they hold the default value 0), how does this affect theaverage? Discuss whether the program should distinguish "not entered" from "a score of 0".
+
+   **Answer:**
+
+   The result:
+
+   ![result-experiment3-4-jobsheet11](result-experiment3-4-jobsheet11.png)
+
+## Independent Assignment
+
+1. Implement the flowchart of the survey exercise from the Programming Fundamentals (theory)slides in a Java program. The survey data consists of 10 respondents and 6 questions withanswers from 1 to 5. The program must:
+
+   * store the survey results in a 2-dimensional array.
+   * display the average score for each respondent.
+   * display the average score for each question.
+   * display the overall average score.
+
+_notes: it is recommended to store the number of respondents and questions inconstants, for example final int NUM_RESPONDENTS = 10;. Every loop can then use the samebound, and the value is easy to change._
+
